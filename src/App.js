@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useReducer } from "react";
+import axios from "axios";
+import Context from "./context";
+import reducer from "./reducer";
 
 function App() {
+  const handleClick = () => {
+    axios
+      .get("https://api.chucknorris.io/jokes/random")
+      .then(data => dispatch({ type: "JOKE", payload: data.data.value }));
+  };
+  const initialState = useContext(Context);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Hey!
+      <button onClick={handleClick}>Get Joke</button>
     </div>
   );
 }
