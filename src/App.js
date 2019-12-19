@@ -11,11 +11,12 @@ function App() {
   };
   const initialState = useContext(Context);
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
+
   return (
     <div>
-      Hey!
+      Hey! We just fetched a chuck noris joke:
       <button onClick={handleClick}>Get Joke</button>
+      {state.joke}
     </div>
   );
 }
